@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jakub Kościelny</title>
+
+    <meta
+        name="description"
+        content="Portfolio Jakuba Kościelnego — projekty, pomysły i rzeczy, które tworzę."
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #07070b;
+            color: #fff;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 550px;
+            height: 550px;
+            background: #7c3aed;
+            border-radius: 50%;
+            filter: blur(190px);
+            opacity: 0.12;
+            top: -250px;
+            left: -200px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #06b6d4;
+            border-radius: 50%;
+            filter: blur(190px);
+            opacity: 0.06;
+            right: -200px;
+            bottom: -200px;
+            z-index: -1;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            padding: 70px 8%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 80px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hello {
+            color: #a78bfa;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: clamp(60px, 10vw, 125px);
+            line-height: 0.88;
+            letter-spacing: -7px;
+            margin-bottom: 35px;
+        }
+
+        .hero h1 span {
+            color: #8b5cf6;
+        }
+
+        .hero-description {
+            max-width: 650px;
+            color: #92929d;
+            font-size: 19px;
+            margin-bottom: 35px;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 23px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            text-decoration: none;
+
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #8b5cf6;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #7c3aed;
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 15px 35px rgba(139, 92, 246, 0.25);
+        }
+
+        .btn-secondary {
+            border: 1px solid #292934;
+            color: #ddd;
+        }
+
+        .btn-secondary:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-4px);
+        }
+
+        /* =========================
+           AVATAR
+        ========================= */
+
+        .avatar {
+            width: 300px;
+            height: 300px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            font-size: 72px;
+            font-weight: 900;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #8b5cf6,
+                    #06b6d4
+                );
+
+            box-shadow:
+                0 0 100px rgba(139, 92, 246, 0.22);
+
+            animation: floating 5s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        section {
+            padding: 130px 8%;
+        }
+
+        .section-label {
+            color: #8b5cf6;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: clamp(40px, 6vw, 65px);
+            line-height: 1;
+            letter-spacing: -2px;
+            margin-bottom: 35px;
+        }
+
+        /* =========================
+           KIM JESTEM
+        ========================= */
+
+        .about {
+            max-width: 900px;
+        }
+
+        .about p {
+            color: #96969f;
+            font-size: 19px;
+            margin-bottom: 25px;
+        }
+
+        .about strong {
+            color: #fff;
+        }
+
+        /* =========================
+           PROJEKTY
+        ========================= */
+
+        .projects-wrapper {
+            max-width: 1200px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .project {
+            position: relative;
+
+            min-height: 300px;
+
+            padding: 35px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #111118,
+                    #0c0c11
+                );
+
+            border: 1px solid #20202a;
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            transition:
+                transform 0.35s ease,
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .project::after {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            background: #8b5cf6;
+
+            filter: blur(100px);
+
+            opacity: 0;
+
+            right: -100px;
+            top: -100px;
+
+            transition: 0.4s;
+        }
+
+        .project:hover {
+            transform: translateY(-8px);
+
+            border-color: #8b5cf6;
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .project:hover::after {
+            opacity: 0.13;
+        }
+
+        .project-icon {
+            font-size: 45px;
+            margin-bottom: 25px;
+        }
+
+        .project h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .project p {
+            max-width: 600px;
+
+            color: #85858e;
+
+            font-size: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .project-link {
+            position: relative;
+            z-index: 2;
+
+            color: #a78bfa;
+
+            font-size: 13px;
+            font-weight: bold;
+
+            text-decoration: none;
+
+            transition: 0.3s;
+        }
+
+        .project-link:hover {
+            color: #fff;
+        }
+
+        /* =========================
+           GITHUB
+        ========================= */
+
+        .github {
+            margin-top: 35px;
+        }
+
+        .github p {
+            color: #666;
+            margin-bottom: 18px;
+        }
+
+        /* =========================
+           KONTAKT
+        ========================= */
+
+        .contact {
+            text-align: center;
+        }
+
+        .contact-inner {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .contact h2 {
+            font-size: clamp(45px, 7vw, 75px);
+            line-height: 1;
+            letter-spacing: -3px;
+            margin-bottom: 25px;
+        }
+
+        .contact p {
+            color: #888;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .email {
+            display: block;
+
+            margin-top: 20px;
+
+            color: #a78bfa;
+
+            text-decoration: none;
+
+            transition: 0.3s;
+        }
+
+        .email:hover {
+            color: #fff;
+        }
+
+        /* =========================
+           ANIMACJA
+        ========================= */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .hero-content {
+                margin: auto;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .avatar {
+                width: 220px;
+                height: 220px;
+                font-size: 55px;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            section {
+                padding: 90px 6%;
+            }
+
+            .hero {
+                padding: 60px 6%;
+            }
+
+            .hero h1 {
+                font-size: 62px;
+                letter-spacing: -4px;
+            }
+
+            .hero-description {
+                font-size: 17px;
+            }
+
+            .avatar {
+                width: 180px;
+                height: 180px;
+                font-size: 45px;
+            }
+
+            .about p {
+                font-size: 17px;
+            }
+
+            .project {
+                padding: 28px;
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content reveal">
+
+            <div class="hello">
+                CZEŚĆ 👋
+            </div>
+
+            <h1>
+                Jakub<br>
+                <span>Kościelny.</span>
+            </h1>
+
+            <p class="hero-description">
+                Witaj na mojej stronie.
+                To moje miejsce w internecie,
+                gdzie możesz dowiedzieć się czegoś
+                więcej o mnie i zobaczyć rzeczy,
+                które stworzyłem.
+            </p>
+
+            <div class="buttons">
+
+                <a
+                    href="#about"
+                    class="btn btn-primary"
+                >
+                    Kim jestem?
+                </a>
+
+                <a
+                    href="#projects"
+                    class="btn btn-secondary"
+                >
+                    Projekty
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="avatar reveal">
+            JK
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         KIM JESTEM
+    ========================= -->
+
+    <section id="about">
+
+        <div class="about reveal">
+
+            <div class="section-label">
+                01 — O mnie
+            </div>
+
+            <h2 class="section-title">
+                Kim jestem?
+            </h2>
+
+            <p>
+                Nazywam się
+                <strong>Jakub Kościelny</strong>.
+                Lubię tworzyć własne rzeczy,
+                eksperymentować z pomysłami
+                i sprawdzać, co można z nich zrobić.
+            </p>
+
+            <p>
+                Nie ograniczam się do jednego rodzaju
+                projektów. Czasami jest to mała gra,
+                czasami eksperyment, a czasami większy
+                pomysł, który rozwijam przez dłuższy czas.
+            </p>
+
+            <p>
+                Ta strona jest moją cyfrową wizytówką.
+                Będę tutaj dodawał kolejne projekty
+                oraz rzeczy, które uznam za warte pokazania.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROJEKTY
+    ========================= -->
+
+    <section id="projects">
+
+        <div class="projects-wrapper">
+
+            <div class="reveal">
+
+                <div class="section-label">
+                    02 — Projekty
+                </div>
+
+                <h2 class="section-title">
+                    To, co stworzyłem.
+                </h2>
+
+            </div>
+
+
+            <div class="projects">
+
+                <!-- SNAKE -->
+
+                <article class="project reveal">
+
+                    <div class="project-icon">
+                        🐍
+                    </div>
+
+                    <h3>
+                        Snake
+                    </h3>
+
+                    <p>
+                        Nowa edycja klasycznej gry Snake.
+                        Projekt jest rozwijany jako nowa
+                        wersja mojego starszego pomysłu.
+                    </p>
+
+                    <a
+                        href="https://github.com/Kub4-dev/Snake"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        Zobacz projekt →
+                    </a>
+
+                </article>
+
+
+                <!-- GRADIENT GENERATOR -->
+
+                <article class="project reveal">
+
+                    <div class="project-icon">
+                        🎨
+                    </div>
+
+                    <h3>
+                        Gradient Generator
+                    </h3>
+
+                    <p>
+                        Eksperymentalny generator gradientów
+                        oraz własny image engine.
+                    </p>
+
+                    <a
+                        href="https://github.com/Kub4-dev/Gradient-Generator"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        Zobacz projekt →
+                    </a>
+
+                </article>
+
+
+                <!-- ROBLOX -->
+
+                <article class="project reveal">
+
+                    <div class="project-icon">
+                        🎮
+                    </div>
+
+                    <h3>
+                        Start Screen For Roblox Games
+                    </h3>
+
+                    <p>
+                        Projekt związany z tworzeniem
+                        ekranów startowych dla gier Roblox.
+                    </p>
+
+                    <a
+                        href="https://github.com/Kub4-dev/Start-Screen-For-Roblox-Games"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        Zobacz projekt →
+                    </a>
+
+                </article>
+
+            </div>
+
+
+            <!-- GITHUB -->
+
+            <div class="github reveal">
+
+                <p>
+                    Więcej znajdziesz na moim GitHubie.
+                </p>
+
+                <a
+                    href="https://github.com/Kub4-dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-secondary"
+                >
+                    Otwórz GitHub →
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         KONTAKT
+    ========================= -->
+
+    <section
+        class="contact"
+        id="contact"
+    >
+
+        <div class="contact-inner reveal">
+
+            <div class="section-label">
+                03 — Kontakt
+            </div>
+
+            <h2>
+                Masz pomysł?
+            </h2>
+
+            <p>
+                Jeśli chcesz się ze mną skontaktować,
+                możesz napisać do mnie wiadomość.
+            </p>
+
+            <a
+                href="mailto:kuba75941@gmail.com"
+                class="btn btn-primary"
+            >
+                Napisz do mnie
+            </a>
+
+            <a
+                href="mailto:kuba75941@gmail.com"
+                class="email"
+            >
+                kuba75941@gmail.com
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const elements =
+            document.querySelectorAll(".reveal");
+
+        const observer =
+            new IntersectionObserver(
+                (entries) => {
+
+                    entries.forEach((entry) => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("active");
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+        elements.forEach((element) => {
+            observer.observe(element);
+        });
+
+    </script>
+
+</body>
+</html>
